@@ -1,12 +1,15 @@
-from flask import Flask
+from flask import Flask , request
 import os
+import logging
 
 app = Flask(__name__)
 
-
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+@app.route("/", methods=["POST", "GET"])
+def setWebhook():
+    if request.method == "GET":
+        logging.info("Hello, Telegram!")
+        print "Done"
+        return "OK, Telegram Bot!"
 
 
 if __name__ == '__main__':
