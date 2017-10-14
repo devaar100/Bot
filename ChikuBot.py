@@ -15,7 +15,7 @@ def setWebhook():
         print "Done"
         return "OK, Telegram Bot!"
 
-@app.route("/verify", methods=["POST"])
+@app.route("/verify", methods=["GET"])
 def verification():
     if request.method == "POST":
         update = telegram.Update.de_json(request.get_json(force=True),bot)
