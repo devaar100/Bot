@@ -1,8 +1,12 @@
 from flask import Flask , request
 import os
 import logging
+import telegram
 
 app = Flask(__name__)
+
+bot = telegram.Bot(token='TOKEN')
+botName = "Chiku_bot"
 
 @app.route("/", methods=["POST", "GET"])
 def setWebhook():
@@ -11,6 +15,22 @@ def setWebhook():
         print "Done"
         return "OK, Telegram Bot!"
 
+@app.route("/verify", methods=["POST"])
+def verification():
+    if request.method == "POST":
+        update = telegram.Update.de_json(request.get_json(force=True),bot)
+        if update is None:
+            return "Show me your TOKEN please!"
+        logging.info("Calling {}".format(update.message))
+        handle_message(update.message)
+        return "ok"
+
+
+def handle_message(msg):
+    text = msg.text
+    print msg
+    # An echo bot
+    bot.sendMessage(chat_id=msg.chat.id, text=text)
 
 if __name__ == '__main__':
     app.debug = True
