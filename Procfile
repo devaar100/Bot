@@ -1,1 +1,1 @@
-web: python ChikuBot.py
+web: gunicorn app:app --log-file=-
