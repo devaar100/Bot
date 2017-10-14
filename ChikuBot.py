@@ -5,7 +5,7 @@ import telegram
 
 app = Flask(__name__)
 
-bot = telegram.Bot(token='TOKEN')
+bot = telegram.Bot(token='427815024:AAG_4OHSiublONg_bgZACbpkISrAouhUHSE')
 botName = "Chiku_bot"
 
 @app.route("/", methods=["POST", "GET"])
