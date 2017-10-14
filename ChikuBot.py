@@ -2,6 +2,7 @@ from flask import Flask , request
 import os
 import logging
 import telegram
+import requests
 
 app = Flask(__name__)
 
@@ -17,7 +18,7 @@ def setWebhook():
 
 @app.route("/verify", methods=["GET"])
 def verification():
-    if request.method == "POST":
+    if request.method == "GET":
         update = telegram.Update.de_json(request.get_json(force=True),bot)
         if update is None:
             return "Show me your TOKEN please!"
