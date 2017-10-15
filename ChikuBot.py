@@ -1,4 +1,5 @@
 from flask import Flask , request
+from flask_mail import Mail , Message
 import os
 import logging
 import telegram
@@ -8,12 +9,23 @@ app = Flask(__name__)
 bot = telegram.Bot(token='427815024:AAG_4OHSiublONg_bgZACbpkISrAouhUHSE')
 botName = "Chiku_bot"
 
-@app.route("/", methods=["POST", "GET"])
+app.config['Mail_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'aarnavjindal1000@gmail.com'
+app.config['MAIL_PASSWORD'] = '9350577773'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+
+mail = Mail(app);
+
+@app.route("/")
 def setWebhook():
-    if request.method == "GET":
-        logging.info("Hello, Telegram!")
-        print("Done")
-        return "OK, Telegram Bot!"
+    msg = Message('Hello',sender = 'aarnavjindal1000@gmail.com', recipients=['developer.aarnav100@gmail.com'])
+    msg.body = "Sent from server automatically"
+    mail.send(msg)
+    logging.info("Hello, Telegram!")
+    print("Done")
+    return "Mail sent"
 
 @app.route("/verify", methods=["POST"])
 def verification():
