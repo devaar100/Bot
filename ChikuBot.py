@@ -8,23 +8,31 @@ app = Flask(__name__)
 
 bot = telegram.Bot(token='427815024:AAG_4OHSiublONg_bgZACbpkISrAouhUHSE')
 botName = "Chiku_bot"
+mail = Mail(app)
 
-app.config['Mail_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'aarnavjindal1000@gmail.com'
-app.config['MAIL_PASSWORD'] = '9350577773'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
+app.config.update(
+	DEBUG=True,
+	#EMAIL SETTINGS
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME = 'aarnavjindal1000@gmail.com',
+	MAIL_PASSWORD = 'xbvpudzlderrcauq'
+	)
 
-mail = Mail(app);
+mail = Mail(app)
 
 @app.route("/")
 def setWebhook():
-    msg = Message('Hello',sender = 'aarnavjindal1000@gmail.com', recipients=['developer.aarnav100@gmail.com'])
-    msg.body = "Sent from server automatically"
-    mail.send(msg)
     logging.info("Hello, Telegram!")
     print("Done")
+    return "Hi from telebot"
+
+@app.route("/mail/<name>", methods=['GET'])
+def send_mail(name):
+    msg = Message('Hello', sender='aarnavjindal1000@gmail.com', recipients=[name])
+    msg.body = "Sent from server automatically"
+    mail.send(msg)
     return "Mail sent"
 
 @app.route("/verify", methods=["POST"])
