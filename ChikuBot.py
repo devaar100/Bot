@@ -8,7 +8,6 @@ app = Flask(__name__)
 
 bot = telegram.Bot(token='427815024:AAG_4OHSiublONg_bgZACbpkISrAouhUHSE')
 botName = "Chiku_bot"
-mail = Mail(app)
 
 app.config.update(
 	DEBUG=True,
