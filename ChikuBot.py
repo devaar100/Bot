@@ -9,17 +9,17 @@ app = Flask(__name__)
 bot = telegram.Bot(token='427815024:AAG_4OHSiublONg_bgZACbpkISrAouhUHSE')
 botName = "Chiku_bot"
 
-app.config.update(
-	DEBUG=True,
-	#EMAIL SETTINGS
-	MAIL_SERVER='smtp.gmail.com',
-	MAIL_PORT=465,
-	MAIL_USE_SSL=True,
-	MAIL_USERNAME = 'aarnavjindal1000@gmail.com',
-	MAIL_PASSWORD = 'xbvpudzlderrcauq'
-	)
-
-mail = Mail(app)
+# app.config.update(
+# 	DEBUG=True,
+# 	#EMAIL SETTINGS
+# 	MAIL_SERVER='smtp.gmail.com',
+# 	MAIL_PORT=465,
+# 	MAIL_USE_SSL=True,
+# 	MAIL_USERNAME = 'xxx',
+# 	MAIL_PASSWORD = 'xxx'
+# 	)
+#
+# mail = Mail(app)
 
 @app.route("/")
 def setWebhook():
@@ -27,12 +27,12 @@ def setWebhook():
     print("Done")
     return "Hi from telebot"
 
-@app.route("/mail/<name>", methods=['GET'])
-def send_mail(name):
-    msg = Message('Hello', sender='aarnavjindal1000@gmail.com', recipients=[name])
-    msg.body = "Sent from server automatically"
-    mail.send(msg)
-    return "Mail sent"
+# @app.route("/mail/<name>", methods=['GET'])
+# def send_mail(name):
+#     msg = Message('Hello', sender='aarnavjindal1000@gmail.com', recipients=[name])
+#     msg.body = "Sent from server automatically"
+#     mail.send(msg)
+#     return "Mail sent"
 
 @app.route("/verify", methods=["POST"])
 def verification():
